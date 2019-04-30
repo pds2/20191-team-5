@@ -1,1 +1,3 @@
-# There's nothing here, yet 🤙
+# Pierre Laplaces's Card Game
+
+A Card game inspired by Hearthstone, Magic and Yu-Gi-Oh
