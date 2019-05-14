@@ -1,4 +1,4 @@
-digraph G {
+digraph ClassDiagram {
 	fontname = "Bitstream Vera Sans"
   fontsize = 8
   splines = "ortho"
@@ -89,4 +89,27 @@ digraph G {
       Defesa \l
     }"
   ]
+
+	// Heranças
+  edge [
+    arrowhead = "empty"
+  ]
+  
+  CartaMágica -> Carta
+  CartaMonstro -> Carta
+  
+  // Composições
+  edge [
+    arrowhead = "diamond"
+  ]
+  Vez -> Turno
+  Fase -> Turno
+  Turno -> Partida
+  Posição -> CartaMonstro
+  
+  edge [
+    arrowhead = "odiamond"
+  ]
+  Carta -> Jogador
+  Jogador -> Partida
 }
