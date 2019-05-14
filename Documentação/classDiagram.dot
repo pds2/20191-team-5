@@ -13,4 +13,80 @@ digraph G {
     fontname = "Bitstream Vera Sans"
     fontsize = 8
   ]
+
+	// Classes  
+  Partida [
+  	label = "{ Partida
+      |
+      + jogadores : pair\<Jogador\> \l
+      + turno : Turno \l
+    }"
+  ]
+  
+  Turno [
+    label = "{ Turno
+      |
+      + fase : Fase \l
+      + vez : Vez \l
+    }"
+  ]
+  
+  Fase [
+    label = "{ \<\<enumeration\>\> \l Fase
+      |
+      Compra \l
+      Posicionamento \l
+      Invocação \l
+      Batalha \l
+    }"
+  ]
+  
+  Vez [
+    label = "{ \<\<enumeration\>\> \l Vez
+      |
+      PrimeiroJogador \l
+      SegundoJogador \l
+    }"
+  ]
+
+  Jogador [
+  	label = "{ Jogador
+      |
+      + baralho : stack\<Carta\> \l
+      + mão : vector\<Carta\> \l
+      + campo : pair\<optional\<CartaMonstro\>\> \l
+      + vida : int \l
+    }"
+  ]
+  
+  Carta [
+    label = "{ Carta
+      |
+      + nome : string \l
+    }"
+  ]
+  
+  CartaMágica [
+    label = "{ CartaMágica
+      |
+      + descrição : string \l
+    }"
+  ]
+  
+  CartaMonstro [
+    label = "{ CartaMonstro
+      |
+      + ataque : int \l
+      + defesa : int \l
+      + posição : Posição \l
+    }"
+  ]
+  
+  Posição [
+    label = "{ \<\<enumeration\>\> \l Posição
+      |
+      Ataque \l
+      Defesa \l
+    }"
+  ]
 }
