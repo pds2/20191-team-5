@@ -15,78 +15,131 @@ digraph ClassDiagram {
   ]
 
 	// Classes  
-  Partida [
-  	label = "{ Partida
+  Game [
+  	label = "{ Game
       |
-      + jogadores : pair\<Jogador\> \l
-      + turno : Turno \l
+      - players: pair\<Player\> \l
+      - turn: Turn \l
+      |
+      + Game() \l
+      + draw(): void \l
+      + toggleMode(position: Position): void \l
+      + summon(card: Card, position: optional\<Position\>): void \l
+      + attack(monster: MonsterCard, target: optional\<Position\>): void \l
+      + endPhase(): void \l
+      + getPlayers(): pair\<Player\> \l
+      + getTurn(): Turn \l
     }"
   ]
   
-  Turno [
-    label = "{ Turno
+  Turn [
+    label = "{ Turn
       |
-      + fase : Fase \l
-      + vez : Vez \l
+      - phase: Phase \l
+      - playerIndex: int \l
+      - summonedMonster: bool \l
+      - summonedMagic: bool \l
+      - attacked: pair\<bool\> \l
+      |
+      + Turn(playerIndex: int) \l
+      + endPhase(): void \l
+      + getPhase(): Phase \l
+      + getPlayerIndex(): int \l
+      + hasSummonedMonster: bool \l
+      + hasSummonedMagic: bool \l
+      + hasAttacked(index: int): bool \l
     }"
   ]
   
-  Fase [
-    label = "{ \<\<enumeration\>\> \l Fase
+  Phase [
+    label = "{ \<\<enumeration\>\> \l Phase
       |
-      Compra \l
-      Posicionamento \l
-      Invocação \l
-      Batalha \l
-    }"
-  ]
-  
-  Vez [
-    label = "{ \<\<enumeration\>\> \l Vez
-      |
-      PrimeiroJogador \l
-      SegundoJogador \l
+      Draw \l
+      Position \l
+      Summon \l
+      Battle \l
+      End \l
     }"
   ]
 
-  Jogador [
-  	label = "{ Jogador
+  Player [
+  	label = "{ Player
       |
-      + baralho : stack\<Carta\> \l
-      + mão : vector\<Carta\> \l
-      + campo : pair\<optional\<CartaMonstro\>\> \l
-      + vida : int \l
+      - life: int \l
+      - deck: stack\<Card\> \l
+      - hand: vector\<Card\> \l
+      - field: pair\<optional\<MonsterCard\>\> \l
+      |
+      + Player() \l
+      + drawCard(): void \l
+      + reduceLife(by: int) \l
+      + getLife(): int \l
+      + getHand(): vector\<Card\> \l
+      + getField(): pair\<optional\<MonsterCard\>\> \l
     }"
   ]
   
-  Carta [
-    label = "{ Carta
+  Card [
+    label = "{ Card
       |
-      + nome : string \l
+      - name: string \l
+      |
+      + Card() \l
+      + apply(game: Game, position: optional\<Position\>): void \l
+      + getName(): string \l
+      + getTarget(): Target \l
+    }"
+  ]
+
+  Target [
+    label = "{ \<\<enumeration\>\> \l Target
+      |
+      NoTarget \l
+      Self \l
+      Opponent \l
     }"
   ]
   
-  CartaMágica [
-    label = "{ CartaMágica
+  MagicCard [
+    label = "{ MagicCard
       |
-      + descrição : string \l
+      - description : string \l
+      |
+      + MagicCard() \l
     }"
   ]
   
-  CartaMonstro [
-    label = "{ CartaMonstro
+  MonsterCard [
+    label = "{ MonsterCard
       |
-      + ataque : int \l
-      + defesa : int \l
-      + posição : Posição \l
+      - attack: int \l
+      - defense: int \l
+      - mode: Mode \l
+      |
+      + MonsterCard() \l
+      + getAttack(): int \l
+      + getDefense(): int \l
+      + getMode(): Mode \l
     }"
   ]
   
-  Posição [
-    label = "{ \<\<enumeration\>\> \l Posição
+  Mode [
+    label = "{ \<\<enumeration\>\> \l Mode
       |
-      Ataque \l
-      Defesa \l
+      Attack \l
+      Defense \l
+    }"
+  ]
+
+  Position [
+    label = "{ Position
+      |
+      - self: bool \l
+      - index: int \l
+      |
+      + Position(self: bool, index: int) \l
+      + isSelf(): bool \l
+      + getIndex(): int \l
     }"
   ]
 
@@ -95,21 +148,20 @@ digraph ClassDiagram {
     arrowhead = "empty"
   ]
   
-  CartaMágica -> Carta
-  CartaMonstro -> Carta
+  MagicCard -> Card
+  MonsterCard -> Card
   
   // Composições
   edge [
     arrowhead = "diamond"
   ]
-  Vez -> Turno
-  Fase -> Turno
-  Turno -> Partida
-  Posição -> CartaMonstro
+  Phase -> Turn
+  Turn -> Game
+  Mode -> MonsterCard
   
   edge [
     arrowhead = "odiamond"
   ]
-  Carta -> Jogador
-  Jogador -> Partida
+  Card -> Player
+  Player -> Game
 }
