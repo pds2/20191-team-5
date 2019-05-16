@@ -24,8 +24,8 @@ digraph ClassDiagram {
       + Game() \l
       + draw(): void \l
       + toggleMode(position: Position): void \l
-      + summon(card: Card, position: optional\<Position\>): void \l
-      + attack(monster: MonsterCard, target: optional\<Position\>): void \l
+      + summon(cardIndex: int, position: optional\<Position\>): void \l
+      + attack(monster: Position, target: optional\<Position\>): void \l
       + endPhase(): void \l
       + getPlayers(): pair\<Player\> \l
       + getTurn(): Turn \l
@@ -84,10 +84,11 @@ digraph ClassDiagram {
       |
       - name: string \l
       |
-      + Card() \l
+      + Card(name: string) \l
       + apply(game: Game, position: optional\<Position\>): void \l
       + getName(): string \l
       + getTarget(): Target \l
+      + getDescription(): string \l
     }"
   ]
 
@@ -103,9 +104,14 @@ digraph ClassDiagram {
   MagicCard [
     label = "{ MagicCard
       |
-      - description : string \l
+      - description: string \l
+      - attackDelta: int \l
+      - defenseDelta: int \l
+      - lifeDelta: int \l
+      - destroy: bool \l
+      - target: Target \l
       |
-      + MagicCard() \l
+      + MagicCard(...) \l
     }"
   ]
   
@@ -116,7 +122,8 @@ digraph ClassDiagram {
       - defense: int \l
       - mode: Mode \l
       |
-      + MonsterCard() \l
+      + MonsterCard(name: string, attack: int, defense: int) \l
+      + toggleMode(): Mode \l
       + getAttack(): int \l
       + getDefense(): int \l
       + getMode(): Mode \l
@@ -158,6 +165,7 @@ digraph ClassDiagram {
   Phase -> Turn
   Turn -> Game
   Mode -> MonsterCard
+  Target -> MagicCard
   
   edge [
     arrowhead = "odiamond"
