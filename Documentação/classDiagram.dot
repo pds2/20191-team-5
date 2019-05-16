@@ -1,5 +1,5 @@
 digraph ClassDiagram {
-	fontname = "Bitstream Vera Sans"
+  fontname = "Bitstream Vera Sans"
   fontsize = 8
   splines = "ortho"
 
@@ -14,9 +14,9 @@ digraph ClassDiagram {
     fontsize = 8
   ]
 
-	// Classes  
+  // Classes  
   Game [
-  	label = "{ Game
+    label = "{ Game
       |
       - players: pair\<Player\> \l
       - turn: Turn \l
@@ -63,7 +63,7 @@ digraph ClassDiagram {
   ]
 
   Player [
-  	label = "{ Player
+    label = "{ Player
       |
       - life: int \l
       - deck: stack\<Card\> \l
@@ -150,7 +150,7 @@ digraph ClassDiagram {
     }"
   ]
 
-	// Heranças
+  // Heranças
   edge [
     arrowhead = "empty"
   ]
