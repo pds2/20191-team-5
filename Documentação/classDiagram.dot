@@ -1,0 +1,175 @@
+digraph ClassDiagram {
+  fontname = "Bitstream Vera Sans"
+  fontsize = 8
+  splines = "ortho"
+
+  node [
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    shape = "record"
+  ]
+
+  edge [
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+  ]
+
+  // Classes  
+  Game [
+    label = "{ Game
+      |
+      - players: pair\<Player\> \l
+      - turn: Turn \l
+      |
+      + Game() \l
+      + draw(): void \l
+      + toggleMode(position: Position): void \l
+      + summon(cardIndex: int, position: optional\<Position\>): void \l
+      + attack(monster: Position, target: optional\<Position\>): void \l
+      + endPhase(): void \l
+      + getPlayers(): pair\<Player\> \l
+      + getTurn(): Turn \l
+    }"
+  ]
+  
+  Turn [
+    label = "{ Turn
+      |
+      - phase: Phase \l
+      - playerIndex: int \l
+      - summonedMonster: bool \l
+      - summonedMagic: bool \l
+      - attacked: pair\<bool\> \l
+      |
+      + Turn(playerIndex: int) \l
+      + endPhase(): void \l
+      + getPhase(): Phase \l
+      + getPlayerIndex(): int \l
+      + hasSummonedMonster: bool \l
+      + hasSummonedMagic: bool \l
+      + hasAttacked(index: int): bool \l
+    }"
+  ]
+  
+  Phase [
+    label = "{ \<\<enumeration\>\> \l Phase
+      |
+      Draw \l
+      Position \l
+      Summon \l
+      Battle \l
+      End \l
+    }"
+  ]
+
+  Player [
+    label = "{ Player
+      |
+      - life: int \l
+      - deck: stack\<Card\> \l
+      - hand: vector\<Card\> \l
+      - field: pair\<optional\<MonsterCard\>\> \l
+      |
+      + Player() \l
+      + drawCard(): void \l
+      + reduceLife(by: int) \l
+      + getLife(): int \l
+      + getHand(): vector\<Card\> \l
+      + getField(): pair\<optional\<MonsterCard\>\> \l
+    }"
+  ]
+  
+  Card [
+    label = "{ Card
+      |
+      - name: string \l
+      |
+      + Card(name: string) \l
+      + apply(game: Game, position: optional\<Position\>): void \l
+      + getName(): string \l
+      + getTarget(): Target \l
+      + getDescription(): string \l
+    }"
+  ]
+
+  Target [
+    label = "{ \<\<enumeration\>\> \l Target
+      |
+      NoTarget \l
+      Self \l
+      Opponent \l
+    }"
+  ]
+  
+  MagicCard [
+    label = "{ MagicCard
+      |
+      - description: string \l
+      - attackDelta: int \l
+      - defenseDelta: int \l
+      - lifeDelta: int \l
+      - destroy: bool \l
+      - target: Target \l
+      |
+      + MagicCard(...) \l
+    }"
+  ]
+  
+  MonsterCard [
+    label = "{ MonsterCard
+      |
+      - attack: int \l
+      - defense: int \l
+      - mode: Mode \l
+      |
+      + MonsterCard(name: string, attack: int, defense: int) \l
+      + toggleMode(): Mode \l
+      + getAttack(): int \l
+      + getDefense(): int \l
+      + getMode(): Mode \l
+    }"
+  ]
+  
+  Mode [
+    label = "{ \<\<enumeration\>\> \l Mode
+      |
+      Attack \l
+      Defense \l
+    }"
+  ]
+
+  Position [
+    label = "{ Position
+      |
+      - self: bool \l
+      - index: int \l
+      |
+      + Position(self: bool, index: int) \l
+      + isSelf(): bool \l
+      + getIndex(): int \l
+    }"
+  ]
+
+  // Heranças
+  edge [
+    arrowhead = "empty"
+  ]
+  
+  MagicCard -> Card
+  MonsterCard -> Card
+  
+  // Composições
+  edge [
+    arrowhead = "diamond"
+  ]
+  Phase -> Turn
+  Turn -> Game
+  Mode -> MonsterCard
+  Target -> MagicCard
+  
+  edge [
+    arrowhead = "odiamond"
+  ]
+  Card -> Player
+  Player -> Game
+}
