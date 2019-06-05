@@ -1,0 +1,5 @@
+enum Mode
+{
+  ATTACK,
+  DEFENSE
+};
