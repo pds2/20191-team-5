@@ -1,34 +1,95 @@
 #include <iostream>
 #include <string>
+#include <sstream>  
+#include <vector>
+#include <stdlib.h> 
+#include <time.h>
 #include "httplib.h"
 
 using namespace std;
 
-int main(void)
-{
+
+vector<string> split(string str, char delimiter) {
+  vector<string> internal;
+  stringstream ss(str); // Turn the string into a stream.
+  string tok;
+ 
+  while(getline(ss, tok, delimiter)) {
+    internal.push_back(tok);
+  }
+ 
+  return internal;
+}
+
+map<string, string> getParamsMap(string body){
+    auto sep = split(body, ',');
+    map<string, string> params; 
+    for (auto i = sep.begin(); i != sep.end(); ++i){
+        auto keyval = split(*i, '=');
+        params[keyval[0]] = keyval[1];
+    }
+    return params;
+}
+
+
+int main(void){
     using namespace httplib;
+    srand (time(NULL));
 
     Server svr;
-    string camarada1;
-    string camarada2;
-
+    int camarada1 = -1;
+    int camarada2 = -1;
+    vector<string> eventQueue1;
+    vector<string> eventQueue2;
+    
     svr.Get("/hi", [](const Request& req, Response& res) {
+        cout << "sssss\n";
         res.set_content("Hello World!", "text/plain");
     });
     
     
     svr.Post("/join", [&](const Request& req, Response& res) {
-        if(camarada1.length() == 0){
-            camarada1 = req.get_param_value("nome", 0);
+        auto params = getParamsMap(req.body);
+        string response = "";
+        if(camarada1 == -1){
+            camarada1 = rand();
+            response = to_string(camarada1);
+        } else if(camarada2 == -1){
+            camarada2 = rand();
+            response = to_string(camarada2);   
         }
-        res.set_content(camarada1, "text/plain");
+        
+        cout << params["nome"] << endl;
+        res.set_content(response, "text/plain");
     });
 
 
-    svr.Get(R"(/numbers/(\d+))", [&](const Request& req, Response& res) {
-        auto numbers = req.matches[1];
-        res.set_content(numbers, "text/plain");
+    svr.Post("/events", [&](const Request& req, Response& res) {
+        auto params = getParamsMap(req.body);
+        int playerId = stoi(params["playerId"]);
+        vector<string> eventQueue;
+        if(camarada1 == playerId){
+            eventQueue = eventQueue1;
+        } else if(camarada2 == playerId){
+            eventQueue = eventQueue2; 
+        }
+        
+        stringstream response;
+        for (auto i = eventQueue.begin(); i != eventQueue.end(); ++i){
+            response << *i << "|";
+        }
+        res.set_content(response.str(), "text/plain");
     });
 
-    svr.listen("localhost", 8080);
+    eventQueue1.push_back("aaaaaa");
+    eventQueue1.push_back("aaaaaasdfsdfgfdga");
+    
+    eventQueue2.push_back("aaaaaa2222222222222");
+    eventQueue2.push_back("aaaaaasdfsdfgfdga2222222222222");
+
+    cout << "server up";
+
+    svr.listen("0.0.0.0", 8082);
+    
 }
+
