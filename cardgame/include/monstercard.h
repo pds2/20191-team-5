@@ -13,9 +13,6 @@ class MonsterCard : public Card {
   int defense;
   Mode mode;
 
-  void removeFrom(std::pair<std::optional<MonsterCard*>,
-                            std::optional<MonsterCard*>>& field);
-
  public:
   MonsterCard();
   MonsterCard(string _name, int _attack, int _defense);
@@ -29,4 +26,8 @@ class MonsterCard : public Card {
   Mode getMode();
 
   virtual void apply(Game& game, std::optional<Position&> position) override;
+
+  static void removeFrom(MonsterCard* card,
+                         std::pair<std::optional<MonsterCard*>,
+                                   std::optional<MonsterCard*>>& field);
 };
