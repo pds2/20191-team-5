@@ -10,8 +10,8 @@ Phase Turn::getPhase(){
 
 void Turn::endPhase(){
 	phase = static_cast<Phase>(static_cast<int>(phase) + 1);
-	if (phase == End){
-		phase = Draw;
+	if (phase == Phase::End){
+		phase = Phase::Draw;
 		playerIndex = (playerIndex + 1) % 2;
 	}
 }
