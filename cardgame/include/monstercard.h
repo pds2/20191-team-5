@@ -28,7 +28,17 @@ class MonsterCard : public Card {
   * Toggles the mode between attack and defense
   */
   Mode toggleMode();
+
+  /**
+   * Change attack points by a delta.
+   * @param delta value difference
+   */
   void changeAttack(int delta);
+
+  /**
+   * Change defense points by a delta.
+   * @param delta value difference
+   */
   void changeDefense(int delta);
 
   /**
@@ -51,6 +61,11 @@ class MonsterCard : public Card {
   */
   virtual void apply(Game& game, std::optional<Position&> position) override;
 
+  /**
+   * Remove one card from the field.
+   * @param card the target card
+   * @param field the field from which the card will be removed
+   */
   static void removeFrom(MonsterCard* card,
                          std::pair<std::optional<MonsterCard*>,
                                    std::optional<MonsterCard*>>& field);
