@@ -22,7 +22,7 @@ private:
 	void endPhase();
 
 	/**
-	* Returns the pahse the player is in the game
+	* Returns the phase the player is in the game
 	*/
 	Phase getPhase();
 
@@ -32,17 +32,17 @@ private:
 	int getplayerIndex();
 
 	/**
-	* Returns the summoned monster card
+	* Returns true if the player has summoned a monster card
 	*/
 	bool hasSummonedMonster();
 
 	/**
-	* Returns the summoned magic card
+	* Returns true if the player has summoned a magic card
 	*/
 	bool hasSummonedMagic();
 
 	/**
-	* Returns the monster that attacked
+	* Returns true if the monster card has attacked
 	*/
 	bool hasAttacked(int index);
 };

@@ -22,7 +22,7 @@ class MonsterCard : public Card {
   * MonsterCard constructor.
   * @param _name reference the name of the monster
   * @param _attack reference the points of attack of the mosnter
-  * @param _defense reference the points of _defense of the mosnter
+  * @param _defense reference the points of defense of the mosnter
   */
   MonsterCard(string _name, int _attack, int _defense);
   ~MonsterCard();
