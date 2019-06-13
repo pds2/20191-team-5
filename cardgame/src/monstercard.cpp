@@ -28,6 +28,14 @@ Mode MonsterCard::toggleMode() {
   return (this->mode);
 }
 
+void MonsterCard::changeAttack(int delta) {
+  this->attack += delta;
+}
+
+void MonsterCard::changeDefense(int delta) {
+  this->defense += delta;
+}
+
 // **getAttack: <descrever o que faz>
 int MonsterCard::getAttack() {
   return (this->attack);
@@ -53,22 +61,24 @@ void MonsterCard::apply(Game& game,
     MonsterCard* target = opponent.getField()[position->getIndex()];
 
     if (target->attack < this->attack) {
-      target->removeFrom(opponent.getField());
+      MonsterCard::removeFrom(target, opponent.getField());
       if (target->mode == ATTACK)
         opponent.changeLife(target->attack - this->attack);
     } else {
       Player& player = game.getPlayers()[!opponentIndex];
-      this->removeFrom(player.getField());
+      MonsterCard::removeFrom(this, player.getField());
       player.changeLife(this->attack - target->attack);
     }
   } else
     opponent.changeLife(-this->attack);
 }
 
-void MonsterCard::removeFrom(std::pair<std::optional<MonsterCard*>,
-                                       std::optional<MonsterCard*>>& field) {
-  if (this == field[0].value())
+static void MonsterCard::removeFrom(
+    MonsterCard* card,
+    std::pair<std::optional<MonsterCard*>, std::optional<MonsterCard*>>&
+        field) {
+  if (card == field[0].value())
     field[0] = nullptr;
-  else if (this == *field[1].value())
+  else if (card == *field[1].value())
     field[1] = nullptr;
 }
