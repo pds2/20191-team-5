@@ -5,7 +5,7 @@ Player::Player(int life){
 	
 	//cada jogador comeca com 3 cartas na mao
 	for(int i=0; i<=2; i++)
-		this->hand.push_back(this->deck.pop());
+		this->drawCard();
 }
 
 void Player::changeLife(int delta){
@@ -16,14 +16,15 @@ int Player::getLife(){
 	return this->life;
 }
 
-std::vector<Card> Player::getHand(){
+std::vector<Card*>* Player::getHand(){
 	return this->hand;
 }
 
-std::pair<std::optional<MonsterCard>, std::optional<MonsterCard>> Player::getField(){
+std::vector<std::optional<MonsterCard*>>* Player::getField(){
 	return this->field;
 }
 
 void Player::drawCard(){
-	this->hand.push_back(this->deck.pop());
+	this->hand->push_back(this->deck->top());
+	this->deck->pop();
 }

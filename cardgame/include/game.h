@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include <utility>
 
 #include <player.h>
@@ -8,7 +9,7 @@
 
 class Game {
 	private:
-		std::pair<Player, Player> players;
+		std::vector<Player*> players;
 		Turn turn;
 	public:
 		/**
@@ -48,7 +49,7 @@ class Game {
 		/**
 		 * Returns the players.
 		 */
-		std::pair<Player, Player> getPlayers();
+		std::vector<Player*> getPlayers();
 
 		/**
 		 * Returns the current turn.

@@ -3,14 +3,14 @@
 #include <utility>
 
 class Turn{
-public:
+private:
 	Phase phase;
 	int playerIndex;
 	bool summonedMonster;
 	bool summonedMagic;
 	std::pair <bool, bool> attacked;
 
-private:
+public:
 	/**
 	* Points to the turn player
 	*/
@@ -29,7 +29,7 @@ private:
 	/**
 	* Returns the player's index of the run
 	*/
-	int getplayerIndex();
+	int getPlayerIndex();
 
 	/**
 	* Returns true if the player has summoned a monster card

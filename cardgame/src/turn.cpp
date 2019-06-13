@@ -16,6 +16,10 @@ void Turn::endPhase(){
 	}
 }
 
+int Turn::getPlayerIndex() {
+	return playerIndex;
+}
+
 bool Turn::hasSummonedMonster(){
 	return summonedMonster;
 }
