@@ -15,16 +15,40 @@ class MonsterCard : public Card {
 
  public:
   MonsterCard();
+  /**
+  * MonsterCard constructor.
+  * @param _name reference the name of the monster
+  * @param _attack reference the points of attack of the mosnter
+  * @param _defense reference the points of defense of the mosnter
+  */
   MonsterCard(string _name, int _attack, int _defense);
   ~MonsterCard();
 
+  /**
+  * Toggles the mode between attack and defense
+  */
   Mode toggleMode();
   void changeAttack(int delta);
   void changeDefense(int delta);
+
+  /**
+  * Returns the monster's attack points
+  */
   int getAttack();
+
+  /**
+  * Returns the monster's defense points
+  */
   int getDefense();
+
+  /**
+  * Returns the monster mode
+  */
   Mode getMode();
 
+  /**
+  * Execute the attack
+  */
   virtual void apply(Game& game, std::optional<Position&> position) override;
 
   static void removeFrom(MonsterCard* card,
