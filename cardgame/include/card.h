@@ -19,7 +19,7 @@ public:
     Card(string _name);
     ~Card();
 
-    virtual void apply (Game _game, optional<Position> _position) = 0;
+    virtual void apply (Game& _game, optional<Position&> _position) = 0;
     string getName();
     virtual Target getTarget() = 0;
     virtual string getDescription() = 0;
