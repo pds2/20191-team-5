@@ -6,33 +6,10 @@ TEST_CASE("TESTE xx")
 
     CHECK_EQ;
 }
+
 TEST_CASE("TESTE xx")
 {
 
     CHECK_EQ;
 }
-TEST_CASE("TESTE xx")
-{
 
-    CHECK_EQ;
-}
-TEST_CASE("TESTE xx")
-{
-
-    CHECK_EQ;
-}
-TEST_CASE("TESTE xx")
-{
-
-    CHECK_EQ;
-}
-TEST_CASE("TESTE xx")
-{
-
-    CHECK_EQ;
-}
-TEST_CASE("TESTE xx")
-{
-
-    CHECK_EQ;
-}
