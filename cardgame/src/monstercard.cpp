@@ -28,6 +28,14 @@ Mode MonsterCard::toggleMode() {
   return (this->mode);
 }
 
+void MonsterCard::changeAttack(int delta) {
+  this->attack += delta;
+}
+
+void MonsterCard::changeDefense(int delta) {
+  this->defense += delta;
+}
+
 // **getAttack: <descrever o que faz>
 int MonsterCard::getAttack() {
   return (this->attack);

@@ -22,6 +22,8 @@ class MonsterCard : public Card {
   ~MonsterCard();
 
   Mode toggleMode();
+  void changeAttack(int delta);
+  void changeDefense(int delta);
   int getAttack();
   int getDefense();
   Mode getMode();
