@@ -67,6 +67,10 @@ void MagicCard::apply(Game* game, optional<Position*> position) {
   }
 }
 
+bool MagicCard::isSummonable() {
+  return false;
+}
+
 // **getTarget: <descrever o que faz>
 Target MagicCard::getTarget() {
   return (this->target);

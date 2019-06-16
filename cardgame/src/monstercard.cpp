@@ -58,7 +58,8 @@ void MonsterCard::apply(Game* game, std::optional<Position*> position) {
 
   // if opponent has cards on field
   if (opponent->getField()->at(0) || opponent->getField()->at(1)) {
-    MonsterCard* target = opponent->getField()->at(position.value()->getIndex()).value();
+    MonsterCard* target =
+        opponent->getField()->at(position.value()->getIndex()).value();
 
     if (target->attack < this->attack) {
       MonsterCard::removeFrom(target, opponent->getField());
@@ -73,9 +74,12 @@ void MonsterCard::apply(Game* game, std::optional<Position*> position) {
     opponent->changeLife(-this->attack);
 }
 
-void MonsterCard::removeFrom(
-    MonsterCard* card,
-    std::vector<std::optional<MonsterCard*>>* field) {
+bool MonsterCard::isSummonable() {
+  return true;
+}
+
+void MonsterCard::removeFrom(MonsterCard* card,
+                             std::vector<std::optional<MonsterCard*>>* field) {
   if (card == field->at(0).value())
     field->at(0) = std::nullopt;
   else if (card == (*field)[1].value())

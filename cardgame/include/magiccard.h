@@ -23,6 +23,12 @@ class MagicCard : public Card {
             Target _target);
 
   virtual void apply(Game* game, optional<Position*> position);
+
+  /**
+   * A magic card is never summonable
+   */
+  virtual bool isSummonable() override;
+
   virtual Target getTarget();
   virtual string getDescription();
 };

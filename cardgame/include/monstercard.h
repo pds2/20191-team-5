@@ -63,6 +63,11 @@ class MonsterCard : public Card {
   virtual void apply(Game* game, std::optional<Position*> position) override;
 
   /**
+   * A monster is always summonable
+   */
+   virtual bool isSummonable() override;
+
+  /**
    * Remove one card from the field.
    * @param card the target card
    * @param field the field from which the card will be removed

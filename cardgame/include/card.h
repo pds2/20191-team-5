@@ -42,6 +42,11 @@ public:
     * Returns the description of the card
     */
     virtual string getDescription() = 0;
+
+    /**
+     * Tells if this card can be placed on the field
+     */
+    virtual bool isSummonable() = 0;
 };
 
 #endif /* PDS2_CARD_H */
