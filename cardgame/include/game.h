@@ -26,20 +26,21 @@ class Game {
 		 * Change a monster card mode.
 		 * @param position the card position on the board
 		 */
-		void toggleMode(Position& position);
+		void toggleMode(Position* position);
 
 		/**
-		 * Summon a monster card on the field.
+		 * Summon or apply a card.
 		 * @param cardIndex card index on the player's hand
+		 * @param target position the card will summoned or applied
 		 */
-		void summon(int cardIndex, std::optional<Position&>);
+		void summon(int cardIndex, std::optional<Position*> target);
 
 		/**
 		 * Attack the opponent.
 		 * @param monster the attacker
 		 * @param target target position of the attack
 		 */
-		void attack(Position& monster, std::optional<Position&> target);
+		void attack(Position* monster, std::optional<Position*> target);
 
 		/**
 		 * Advance to the next phase.
