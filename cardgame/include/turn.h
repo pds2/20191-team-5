@@ -37,12 +37,29 @@ public:
 	bool hasSummonedMonster();
 
 	/**
+	 * Mark turn with summoned monster status
+	 */
+	void setSummonedMonster();
+
+	/**
 	* Returns true if the player has summoned a magic card
 	*/
 	bool hasSummonedMagic();
 
 	/**
+	 * Mark turn with summoned magic status
+	 */
+	void setSummonedMagic();
+
+	/**
 	* Returns true if the monster card has attacked
+	* @param index monster index on field
 	*/
 	bool hasAttacked(int index);
+
+	/**
+	 * Mark turn monster with attacked status
+	 * @param index monster index on field
+	 */
+	void setAttacked(int index);
 };
