@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <monstercard.h>
+#include <player.h>
 
 // *CONSTRUTOR
 // **construtor padrão
@@ -9,7 +10,7 @@ MonsterCard::MonsterCard() {}
 
 // **construtor com parâmetros
 MonsterCard::MonsterCard(string _name, int _attack, int _defense)
-    : Card(string _name) {
+    : Card(_name) {
   this->attack = _attack;
   this->defense = _defense;
 }
@@ -51,34 +52,36 @@ Mode MonsterCard::getMode() {
   return (this->mode);
 }
 
-void MonsterCard::apply(Game& game,
-                        std::optional<Position&> position) override {
-  int opponentIndex = !game.getTurn().getPlayerIndex();
-  Player& opponent = game.getPlayers()[opponentIndex];
+void MonsterCard::apply(Game* game, std::optional<Position*> position) {
+  int opponentIndex = !game->getTurn().getPlayerIndex();
+  Player* opponent = game->getPlayers()[opponentIndex];
 
   // if opponent has cards on field
-  if (opponent.getField()[0] || opponent.getField()[1]) {
-    MonsterCard* target = opponent.getField()[position->getIndex()];
+  if (opponent->getField()->at(0) || opponent->getField()->at(1)) {
+    MonsterCard* target =
+        opponent->getField()->at(position.value()->getIndex()).value();
 
     if (target->attack < this->attack) {
-      MonsterCard::removeFrom(target, opponent.getField());
+      MonsterCard::removeFrom(target, opponent->getField());
       if (target->mode == ATTACK)
-        opponent.changeLife(target->attack - this->attack);
+        opponent->changeLife(target->attack - this->attack);
     } else {
-      Player& player = game.getPlayers()[!opponentIndex];
-      MonsterCard::removeFrom(this, player.getField());
-      player.changeLife(this->attack - target->attack);
+      Player* player = game->getPlayers()[!opponentIndex];
+      MonsterCard::removeFrom(this, player->getField());
+      player->changeLife(this->attack - target->attack);
     }
   } else
-    opponent.changeLife(-this->attack);
+    opponent->changeLife(-this->attack);
 }
 
-static void MonsterCard::removeFrom(
-    MonsterCard* card,
-    std::pair<std::optional<MonsterCard*>, std::optional<MonsterCard*>>&
-        field) {
-  if (card == field[0].value())
-    field[0] = nullptr;
-  else if (card == *field[1].value())
-    field[1] = nullptr;
+bool MonsterCard::isSummonable() {
+  return true;
+}
+
+void MonsterCard::removeFrom(MonsterCard* card,
+                             std::vector<std::optional<MonsterCard*>>* field) {
+  if (card == field->at(0).value())
+    field->at(0) = std::nullopt;
+  else if (card == (*field)[1].value())
+    field->at(1) = std::nullopt;
 }

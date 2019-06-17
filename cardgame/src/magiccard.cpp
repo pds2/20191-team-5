@@ -1,4 +1,5 @@
-#include "magiccard.h"
+#include <magiccard.h>
+#include <monstercard.h>
 
 // *CONSTRUTOR
 // **construtor padrão
@@ -19,50 +20,55 @@ MagicCard::MagicCard(string _description,
   this->target = _target;
 }
 
-// *DESTRUTOR
-MagicCard::~MagicCard() {}
-
 // *MÉTODOS
 // **apply: <descrever o que faz>
-virtual void MagicCard::apply(Game& game, optional<Position&> position) {
-  Player& self = game.getPlayers()[game.getTurn().getPlayerIndex()];
-  Player& opponent game.getPlayers()[!game.getTurn().getPlayerIndex()];
+void MagicCard::apply(Game* game, optional<Position*> position) {
+  Player* self = game->getPlayers()[game->getTurn().getPlayerIndex()];
+  Player* opponent = game->getPlayers()[!game->getTurn().getPlayerIndex()];
 
   if (this->attackDelta != 0) {
     MonsterCard* card;
-    if (position.isSelf())
-      card = self.getField()[position.getIndex()].value;
+    if (position.value()->isSelf())
+      card = self->getField()->at(position.value()->getIndex()).value();
     else
-      card = opponent.getField()[position.getIndex()].value;
+      card = opponent->getField()->at(position.value()->getIndex()).value();
     card->changeAttack(this->attackDelta);
   }
   if (this->defenseDelta != 0) {
     MonsterCard* card;
-    if (position.isSelf())
-      card = self.getField()[position.getIndex()].value;
+    if (position.value()->isSelf())
+      card = self->getField()->at(position.value()->getIndex()).value();
     else
-      card = opponent.getField()[position.getIndex()].value;
+      card = opponent->getField()->at(position.value()->getIndex()).value();
     card->changeDefense(this->defenseDelta);
   }
   if (this->lifeDelta != 0) {
     if (this->target == NOTARGET || this->target == SELF)
-      self.changeLife(this->lifeDelta);
+      self->changeLife(this->lifeDelta);
     if (this->target == NOTARGET || this->target == OPPONENT)
-      opponent.changeLife(this->lifeDelta);
+      opponent->changeLife(this->lifeDelta);
   }
   if (this->destroy) {
     if (this->target == NOTARGET) {
-      MonsterCard::removeFrom(self.getField()[0], self.getField());
-      MonsterCard::removeFrom(self.getField()[1], self.getField());
-      MonsterCard::removeFrom(opponent.getField()[0], opponent.getField());
-      MonsterCard::removeFrom(opponent.getField()[1], opponent.getField());
+      MonsterCard::removeFrom(*self->getField()->at(0), self->getField());
+      MonsterCard::removeFrom(*self->getField()->at(1), self->getField());
+      MonsterCard::removeFrom(*opponent->getField()->at(0),
+                              opponent->getField());
+      MonsterCard::removeFrom(*opponent->getField()->at(1),
+                              opponent->getField());
     } else if (this->target == SELF)
-      MonsterCard::removeFrom(self.getField()[position->getIndex()],
-                              self.getField());
+      MonsterCard::removeFrom(
+          self->getField()->at(position.value()->getIndex()).value(),
+          self->getField());
     else if (this->target == OPPONENT)
-      MonsterCard::removeFrom(opponent.getField()[position->getIndex()],
-                              opponent.getField());
+      MonsterCard::removeFrom(
+          opponent->getField()->at(position.value()->getIndex()).value(),
+          opponent->getField());
   }
+}
+
+bool MagicCard::isSummonable() {
+  return false;
 }
 
 // **getTarget: <descrever o que faz>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "card.h"
+#include <card.h>
 
 using namespace std;
 
@@ -21,9 +21,14 @@ class MagicCard : public Card {
             int _lifeDelta,
             bool _destroy,
             Target _target);
-  ~MargicCard();
 
-  virtual void apply(Game& game, optional<Position&> position);
+  virtual void apply(Game* game, optional<Position*> position);
+
+  /**
+   * A magic card is never summonable
+   */
+  virtual bool isSummonable() override;
+
   virtual Target getTarget();
   virtual string getDescription();
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <optional>
+#include <vector>
 
 #include <card.h>
 #include <mode.h>
@@ -16,17 +17,17 @@ class MonsterCard : public Card {
  public:
   MonsterCard();
   /**
-  * MonsterCard constructor.
-  * @param _name reference the name of the monster
-  * @param _attack reference the points of attack of the mosnter
-  * @param _defense reference the points of defense of the mosnter
-  */
+   * MonsterCard constructor.
+   * @param _name reference the name of the monster
+   * @param _attack reference the points of attack of the mosnter
+   * @param _defense reference the points of defense of the mosnter
+   */
   MonsterCard(string _name, int _attack, int _defense);
   ~MonsterCard();
 
   /**
-  * Toggles the mode between attack and defense
-  */
+   * Toggles the mode between attack and defense
+   */
   Mode toggleMode();
 
   /**
@@ -42,24 +43,29 @@ class MonsterCard : public Card {
   void changeDefense(int delta);
 
   /**
-  * Returns the monster's attack points
-  */
+   * Returns the monster's attack points
+   */
   int getAttack();
 
   /**
-  * Returns the monster's defense points
-  */
+   * Returns the monster's defense points
+   */
   int getDefense();
 
   /**
-  * Returns the monster mode
-  */
+   * Returns the monster mode
+   */
   Mode getMode();
 
   /**
-  * Execute the attack
-  */
-  virtual void apply(Game& game, std::optional<Position&> position) override;
+   * Execute the attack
+   */
+  virtual void apply(Game* game, std::optional<Position*> position) override;
+
+  /**
+   * A monster is always summonable
+   */
+   virtual bool isSummonable() override;
 
   /**
    * Remove one card from the field.
@@ -67,6 +73,5 @@ class MonsterCard : public Card {
    * @param field the field from which the card will be removed
    */
   static void removeFrom(MonsterCard* card,
-                         std::pair<std::optional<MonsterCard*>,
-                                   std::optional<MonsterCard*>>& field);
+                         std::vector<std::optional<MonsterCard*>>* field);
 };
