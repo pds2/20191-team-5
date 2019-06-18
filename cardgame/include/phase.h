@@ -1,6 +1,6 @@
 #pragma once
 
-enum Phase
+enum class Phase
 {
 	Draw,
 	Position,
