@@ -21,3 +21,4 @@ Card::~Card(){
 string Card::getName(){
     return (this->name);
 }
+
