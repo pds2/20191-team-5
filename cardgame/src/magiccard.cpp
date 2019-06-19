@@ -6,13 +6,15 @@
 MagicCard::MagicCard() {}
 
 // **construtor com parâmetros
-MagicCard::MagicCard(string _description,
+MagicCard::MagicCard(string _name,
+                     string _description,
                      int _attackDelta,
                      int _defenseDelta,
                      int _lifeDelta,
                      bool _destroy,
                      Target _target) {
   this->description = _description;
+  this->name = _name;
   this->attackDelta = _attackDelta;
   this->defenseDelta = _defenseDelta;
   this->lifeDelta = _lifeDelta;

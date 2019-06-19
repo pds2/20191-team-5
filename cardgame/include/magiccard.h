@@ -15,7 +15,8 @@ class MagicCard : public Card {
 
  public:
   MagicCard();
-  MagicCard(string _description,
+  MagicCard(string _name,
+            string _description,
             int _attackDelta,
             int _defenseDelta,
             int _lifeDelta,

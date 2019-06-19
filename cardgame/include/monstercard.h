@@ -5,6 +5,7 @@
 
 #include <card.h>
 #include <mode.h>
+#include "target.h"
 
 using namespace std;
 
@@ -66,6 +67,10 @@ class MonsterCard : public Card {
    * A monster is always summonable
    */
    virtual bool isSummonable() override;
+   
+   virtual string getDescription() override;
+   
+   virtual Target getTarget() override;
 
   /**
    * Remove one card from the field.

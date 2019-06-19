@@ -1,8 +1,10 @@
 #include <optional>
 #include <utility>
+#include <sstream>
 
 #include <monstercard.h>
 #include <player.h>
+#include "target.h"
 
 // *CONSTRUTOR
 // **construtor padrão
@@ -76,6 +78,16 @@ void MonsterCard::apply(Game* game, std::optional<Position*> position) {
 
 bool MonsterCard::isSummonable() {
   return true;
+}
+
+string MonsterCard::getDescription() {
+  std::stringstream descriptionStream;
+  descriptionStream << this->name << " atk:" << this->attack << " def:" << this->defense;
+  return descriptionStream.str();
+}
+
+Target MonsterCard::getTarget() {
+  return Target::OPPONENT;
 }
 
 void MonsterCard::removeFrom(MonsterCard* card,

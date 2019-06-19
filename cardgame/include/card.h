@@ -32,7 +32,7 @@ public:
     * Returns the name of the card
     */
     string getName();
-
+    
     /**
     * Returns the target of the card
     */
