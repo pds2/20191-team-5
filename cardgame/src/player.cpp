@@ -1,7 +1,10 @@
 #include <player.h>
+#include <deckfactory.h>
 
 Player::Player(int life){
 	this->life=life;
+
+	this->deck = new std::stack(DeckFactory::getNewDeck());
 	
 	//cada jogador comeca com 3 cartas na mao
 	for(int i=0; i<=2; i++)

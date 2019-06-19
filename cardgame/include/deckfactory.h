@@ -13,5 +13,5 @@ class DeckFactory{
     
     public:
     
-    static std::stack<Card> getNewDeck();
+    static std::stack<Card*> getNewDeck();
 };

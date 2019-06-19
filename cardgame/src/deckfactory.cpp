@@ -11,30 +11,27 @@
 std::vector<MonsterCard> DeckFactory::monsters;
 std::vector<MagicCard> DeckFactory::magicCards;
 
-std::stack<Card> DeckFactory::getNewDeck(){
+std::stack<Card*> DeckFactory::getNewDeck(){
     if(DeckFactory::monsters.empty() || DeckFactory::magicCards.empty()){
          loadCards();
     }
-    std::vector<Card> allCards;
-    allCards.insert(allCards.end(), DeckFactory::monsters.begin(), DeckFactory::monsters.end());
-    // allCards.insert(allCards.end(), DeckFactory::magicCards.begin(), DeckFactory::magicCards.end());
-    // auto rng = std::default_random_engine {};
-    // std::shuffle(std::begin(allCards), std::end(allCards), rng);
-    
-    // for(int i = 0; i != allCards.size(); i++) {
-    //      cout << allCards[i].getDescription() << endl;
-    //     /* std::cout << v[i]; ... */
-    // }
-    //  for(int i = 0; i != DeckFactory::monsters.size(); i++) {
-    //      cout << DeckFactory::monsters[i].getDescription() << endl;
-    //     /* std::cout << v[i]; ... */
-    // }
-    // for(int i = 0; i != DeckFactory::magicCards.size(); i++) {
-    //      cout << DeckFactory::magicCards[i].getDescription() << endl;
-    //     /* std::cout << v[i]; ... */
-    // }
-     std::stack<Card> r;
-     return r;
+    std::vector<Card*> allCards;
+    for (MonsterCard monster : DeckFactory::monsters) {
+        MonsterCard* card = new MonsterCard(monster);
+        allCards.push_back(card);
+    }
+    for (MagicCard magic : DeckFactory::magicCards) {
+        MagicCard* card = new MagicCard(magic);
+        allCards.push_back(card);
+    }
+
+    auto rng = std::default_random_engine {};
+    std::shuffle(std::begin(allCards), std::end(allCards), rng);
+
+    std::stack<Card*> deck;
+    for (Card* card : allCards) deck.push(card);
+
+    return deck;
  }
  
  void DeckFactory::loadCards(){
