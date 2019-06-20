@@ -11,7 +11,7 @@ Atualizado o `Makefile` do projeto para build do programa.
 <description>
 
 ### Exceções
-<description>
+Inserção de 3 exceções sobre algumas situações inválidas no programa.
 
 ### <change>
 <description>
