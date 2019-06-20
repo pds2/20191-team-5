@@ -1,8 +1,8 @@
-earth|A description Here|0|0|200|false|SELF
-jupiter|A description Here|0|0|200|false|SELF
-mars|A description Here|0|0|200|false|SELF
-mercury|A description Here|0|0|200|false|SELF
-moon|A description Here|0|0|200|false|SELF
-sun|A description Here|1|0|0|true|OPPONENT
-uranus|A description Here|0|0|200|false|SELF
-venus |A description Here|0|0|200|false|SELF
+earth|Aumenta o valor de ATK de um monstro em 500|500|0|0|false|SELF
+jupiter|Aumenta o valor de DEF de um monstro em 500|0|500|0|false|SELF
+mars|Aumenta o valor dos seus pontos de vida em 1000|0|0|1000|false|SELF
+mercury|Diminui o valor da vida do oponente em 1000|0|0|-1000|false|OPPONENT
+moon|Aumenta o valor de ATK de um monstro em 700, mas você perde 500 de vida|700|0|-500|false|SELF
+sun|Destroi todos os monstros no campo|0|0|0|true|NOTARGET
+uranus|Diminui em 300 o valor de ATK e DEF de algum monstro do oponente|-300|-300|0|false|OPPONENT
+venus|Destroi um monstro em campo|0|0|0|true|OPPONENT
