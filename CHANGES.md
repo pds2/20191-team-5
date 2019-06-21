@@ -8,13 +8,12 @@ Listagem das mudanças implementadas no projeto.
 Atualizado o `Makefile` do projeto para build do programa. 
 
 ### Testes Unitários
-<description>
 
 ### Exceções
 Inserção de 3 exceções sobre algumas situações inválidas no programa.
 
-### <change>
-<description>
+### Server
+Adicionado o servidor http responsável por conectar duas sessões em máquinas diferentes.
 
-### <change>
-<description>
+### Client
+Adicionado o client web para interação com o jogo.
