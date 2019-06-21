@@ -4,6 +4,7 @@
 #include <map>
 #include <algorithm>
 #include <random>
+#include <ctime> 
 
 #include "deckfactory.h"
 #include "monstercard.h"
@@ -26,6 +27,7 @@ std::stack<Card*> DeckFactory::getNewDeck(){
     }
 
     auto rng = std::default_random_engine {};
+    rng.seed(std::time(0));
     std::shuffle(std::begin(allCards), std::end(allCards), rng);
 
     std::stack<Card*> deck;

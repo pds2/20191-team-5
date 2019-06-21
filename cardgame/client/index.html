@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+    <title>Videojogo do Pierre </title>
+</head>
+
+<body>
+    <div class="setup-screen">
+        <div class="setup-screen-content-wrapper">
+            <span>Digite o IP do servidor</span>
+            <input type="text" id="server-address" placeholder="..." value="http://3.83.190.4:8082">
+            <button type="submit" onclick="initSession()">Confirmar</button>
+        </div>
+    </div>
+    <div class="game-root">
+        <div class="board">
+            <div class="finish-phase-button"> <button id="endphase"></button> </div>
+            <div class="enemy-play-area-indicator">
+                <div class="enemy-cards"></div>
+            </div>
+            <div class="play-area-indicator">
+                <div class="own-cards"></div>
+            </div>
+        </div>
+        <div class="enemy-hand-container"></div>
+        <div class="hand-container"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
