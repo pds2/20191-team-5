@@ -15,4 +15,4 @@ O programa é dividido entre cliente e servidor, para rodar o servidor execute:
 ```
 make run
 ```
-O cliente é acessível então em [localhost:8080](http://localhost:8080).
+O cliente é acessível então em [localhost:8082/client/](http://localhost:8082/client/).
