@@ -11,6 +11,6 @@
 TEST_CASE("Teste 1 - MagicCard")
 {
 	MagidCard card = MagicCard(NAME, DESCRIPTION, ATACK, DEFENSE, LIFE, DESTROY);
-	CHECK_EQ(card.isSummonable(), true);
+	CHECK_EQ(card.isSummonable(), false);
 	CHECK_EQ(card.getDescription(), DESC);
 }
