@@ -1,13 +1,17 @@
 #include "doctest.h"
 #include "position.h"
 
-TEST_CASE("Teste xx - ")
-{
+#define INDEX 2
+#define SELF true
 
-  CHECK_EQ();
+TEST_CASE("Teste 1 - Construtor")
+{
+	Position position = Position(true, 2)
+	CHECK_EQ(position.isSelf(), true);
+	CHECK_EQ(position.getIndex(), 3);
 }
 
-TEST_CASE("Teste xx - Exceção - ")
+TEST_CASE("Teste 1 - Exceção - Construtor")
 {
-  CHECK_THROWS(new ());
+  CHECK_THROWS(Position(SELF, INDEX));
 }

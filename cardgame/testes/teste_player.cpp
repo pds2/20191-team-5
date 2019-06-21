@@ -1,13 +1,16 @@
 #include "doctest.h"
 #include "player.h"
 
-TEST_CASE("Teste xx - ")
-{
+#define LIFE 2000
 
-    CHECK_EQ();
+TEST_CASE("Teste 1 - Construtor ")
+{
+	Player player = Player(2000);
+    CHECK_EQ(player.getLife(), 2000);
 }
 
-TEST_CASE("Teste xx - Exceção - ")
+TEST_CASE("Teste 1 - Exceção - Construtor")
 {
-    CHECK_THROWS(new ());
+    CHECK_THROWS(Player(1000);
+
 }
