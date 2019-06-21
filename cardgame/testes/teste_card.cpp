@@ -1,13 +1,16 @@
 #include "doctest.h"
 #include "card.h"
 
-TEST_CASE("Teste xx - ")
-{
+#define NAME "CARTA"
 
-    CHECK_EQ();
+
+TEST_CASE("Teste 1 - Construtor das cartas")
+{
+	Card card = Card("CARTA1");
+	CHECK_EQ(card.getName(), NAME);
 }
 
-TEST_CASE("Teste xx - Exceção - ")
+TEST_CASE("Teste 1 -  Construtor de cartas ")
 {
-    CHECK_THROWS(new ());
+    CHECK_THROWS(Card("CARTA");
 }

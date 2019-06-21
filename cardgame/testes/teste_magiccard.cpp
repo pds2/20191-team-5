@@ -1,13 +1,16 @@
 #include "doctest.h"
 #include "magiccard.h"
 
-TEST_CASE("Teste xx - ")
-{
+#define NAME "CARTA"
+#define DESCRIPTION "DESC"
+#define ATTACK 300
+#define DEFENSE 300
+#define LIFE 2000
+#define DESTROY true
 
-  CHECK_EQ();
-}
-
-TEST_CASE("Teste xx - Exceção - ")
+TEST_CASE("Teste 1 - MagicCard")
 {
-  CHECK_THROWS(new ());
+	MagidCard card = MagicCard(NAME, DESCRIPTION, ATACK, DEFENSE, LIFE, DESTROY);
+	CHECK_EQ(card.isSummonable(), false);
+	CHECK_EQ(card.getDescription(), DESC);
 }
