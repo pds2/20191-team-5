@@ -1,23 +1,45 @@
-CXX		  := g++
-CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb -pthread
+CC := g++
+SRCDIR := src
+TSTDIR := testes
+OBJDIR := build
+BINDIR := bin
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
+MAIN := program/main.cpp
+TESTER := program/tester.cpp
 
-LIBRARIES	:=
-EXECUTABLE	:= main
+SRCEXT := cpp
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+TSTSOURCES := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
 
+# -g debug, --coverage para cobertura
+CFLAGS := --coverage -g -Wall -O3 -std=c++17 -pthread
+INC := -I include/ -I third_party/
 
-all: $(BIN)/$(EXECUTABLE)
+$(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
-run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
+main: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o $(BINDIR)/main
 
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) program/$(EXECUTABLE).cpp $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+testes: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(TESTER) $(TSTSOURCES) $^ -o $(BINDIR)/tester
+	$(BINDIR)/tester
+
+all: main
+
+run: main
+	$(BINDIR)/main
+
+coverage:
+	@mkdir -p coverage/
+	@gcov $(SOURCES) -rlpo build/
+	@$(RM) *.gcda *.gcno
 
 clean:
-	-rm $(BIN)/*
+	$(RM) -r $(OBJDIR)/* $(BINDIR)/* coverage/* *.gcda *.gcno
+
+.PHONY: clean coverage

@@ -153,4 +153,5 @@ map<string, string> GameServer::getParamsMap(string body){
 
 void GameServer::run(){
     httpServer.listen("0.0.0.0", 8082);
+    cout << "rodando" << endl;
 }

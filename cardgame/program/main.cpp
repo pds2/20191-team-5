@@ -19,6 +19,6 @@ int main(){
 
     GameServer server;
     server.run();
-
+    cout << "tampa" << endl;
 }
 
