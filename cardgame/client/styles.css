@@ -1,0 +1,134 @@
+body{
+    overflow-y: hidden;
+}
+
+*{
+    user-select: none;
+}
+
+.hand-container, .enemy-hand-container{
+    display: flex;
+    position: absolute;
+    bottom: -190px;
+    transform: scale(.6);
+    width: 100vw;
+    justify-content: center;
+}
+
+.enemy-hand-container{
+    top: -270px;
+    bottom: inherit;
+}
+
+.enemy-card-root{
+    padding: 10px;
+}
+
+.card-root{
+    padding: 10px;
+    transition: .3s transform;
+}
+
+.card-root.monsters .description-container{
+    display: none;
+}
+
+.card-root.magics .atkdef-container{
+    display: none;
+}
+
+.card-root .atkdef-container{
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 242px;
+    font-size: 40px;
+    padding: 25px 29px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.23137254901960785);
+    font-family: 'Kanit', sans-serif;
+    pointer-events: none;
+}
+
+.card-root .description-container{
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 242px;
+    font-size: 20px;
+    padding: 15px 29px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.23137254901960785);
+    font-family: 'Kanit', sans-serif;
+    pointer-events: none;
+}
+
+.card-root:hover{
+    transform: scale(1.6) translateY(-180px);
+}
+
+body.game-running .game-root{
+    display: block;
+}
+
+body.game-running .setup-screen{
+    display: none;
+}
+
+.setup-screen{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Kanit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.setup-screen input{
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.setup-screen button{
+    margin-top: 10px;
+}
+
+.setup-screen-content-wrapper{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    align-self: center;
+}
+
+.game-root{
+    height: 100vh;
+    display: none;
+}
+
+.board{
+    height: 100vh;
+}
+
+.board .own-cards{
+    height: 47vh;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    transform: scale(.5);
+}
+
+.board .own-cards .card-root, .board .own-cards .card-root:hover, .board .enemy-cards .card-root:hover{
+    transform: none;
+}
+
+.board .enemy-cards{
+    border-bottom: 2px dashed black;
+    height: 61vh;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    transform: scale(.5);
+    margin-bottom: -195px;
+}

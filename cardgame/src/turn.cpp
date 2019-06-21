@@ -1,8 +1,9 @@
 #include <turn.h>
 
 Turn::Turn(int playerIndex) {
+  this->phase = Phase::Draw;
   this->playerIndex = playerIndex;
-  this->summonedMonster = true;
+  this->summonedMonster = false;
   this->summonedMagic = false;
   this->attacked = std::make_pair(false, false);
 }

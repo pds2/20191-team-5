@@ -25,8 +25,8 @@ MagicCard::MagicCard(string _name,
 // *MÉTODOS
 // **apply: <descrever o que faz>
 void MagicCard::apply(Game* game, optional<Position*> position) {
-  Player* self = game->getPlayers()[game->getTurn().getPlayerIndex()];
-  Player* opponent = game->getPlayers()[!game->getTurn().getPlayerIndex()];
+  Player* self = game->getPlayers()->at(game->getTurn().getPlayerIndex());
+  Player* opponent = game->getPlayers()->at(!game->getTurn().getPlayerIndex());
 
   if (this->attackDelta != 0) {
     MonsterCard* card;

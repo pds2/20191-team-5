@@ -1,4 +1,4 @@
-CC := g++-4.8
+CC := g++
 SRCDIR := src
 TSTDIR := testes
 OBJDIR := build
@@ -13,7 +13,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 TSTSOURCES := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
 
 # -g debug, --coverage para cobertura
-CFLAGS := --coverage -g -Wall -O3 -std=c++11
+CFLAGS := --coverage -g -Wall -O3 -std=c++17 -pthread
 INC := -I include/ -I third_party/
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)

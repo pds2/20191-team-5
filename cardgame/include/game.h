@@ -9,7 +9,7 @@
 
 class Game {
 	private:
-		std::vector<Player*> players;
+		std::vector<Player*> *players;
 		Turn turn;
 	public:
 		/**
@@ -50,7 +50,7 @@ class Game {
 		/**
 		 * Returns the players.
 		 */
-		std::vector<Player*> getPlayers();
+		std::vector<Player*>* getPlayers();
 
 		/**
 		 * Returns the current turn.

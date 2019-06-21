@@ -56,7 +56,7 @@ Mode MonsterCard::getMode() {
 
 void MonsterCard::apply(Game* game, std::optional<Position*> position) {
   int opponentIndex = !game->getTurn().getPlayerIndex();
-  Player* opponent = game->getPlayers()[opponentIndex];
+  Player* opponent = game->getPlayers()->at(opponentIndex);
 
   // if opponent has cards on field
   if (opponent->getField()->at(0) || opponent->getField()->at(1)) {
@@ -68,7 +68,7 @@ void MonsterCard::apply(Game* game, std::optional<Position*> position) {
       if (target->mode == ATTACK)
         opponent->changeLife(target->attack - this->attack);
     } else {
-      Player* player = game->getPlayers()[!opponentIndex];
+      Player* player = game->getPlayers()->at(!opponentIndex);
       MonsterCard::removeFrom(this, player->getField());
       player->changeLife(this->attack - target->attack);
     }
